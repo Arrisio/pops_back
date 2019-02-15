@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+    calcpops:
+        restart: always
+        # build: .        
+        image: calcpops:latest
+        ports:
+            - 5006:5000
+        volumes:
+            - .:/app/
+
+        command: python /app/app.py

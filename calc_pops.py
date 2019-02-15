@@ -23,6 +23,7 @@ def set_auto_width_excel_cols(worksheet, indent=4):
 
 def load_data():
     all_buildings_df = pd.read_pickle(os.path.join('data', 'data.pkl'))
+    # all_buildings_geodata = None
     all_buildings_geodata = gpd.read_file(
         os.path.join('data', 'building_gpd.shp'))
     all_buildings_point_tree = spatial.cKDTree(
@@ -78,14 +79,14 @@ class PopsDataObj():
         self.inp_area = inp_area
 
     def compile_data(self, inp_address=None, inp_radius=None, inp_area=None):
-        self.inp_address = inp_address or self.inp_address
+        self.inp_address = inp_address or self.inp_address or 'area'
         self.inp_radius = inp_radius or self.inp_radius or DEFAULT_RADIUS
         self.radius = prepare_radius(self.inp_radius)
         self.inp_area = inp_area or self.inp_area
 
         if self.inp_area:
             buildings_idx = ALL_BUILDINGS_GEOSERIES.geometry.within(
-                string_with_coords2Polygon(inp_area))
+                string_with_coords2Polygon(self.inp_area)).values
             self.nearest_buildings = ALL_BUILDINGS_DF.loc[buildings_idx].copy()
 
         elif self.inp_address:
@@ -119,10 +120,13 @@ class PopsDataObj():
 
         pd.DataFrame(
             data=[
-                self.inp_address, self.inp_radius,
-                round(self.pops_in_radius), self.address_coord
+                self.inp_address,
+                self.inp_radius,
+                # round(self.pops_in_radius), self.address_coord
+                round(self.pops_in_radius)
             ],
-            index=['Адрес', 'Радиус (км.) ', 'Население', 'Координаты'],
+            # index=['Адрес', 'Радиус (км.) ', 'Население', 'Координаты'],
+            index=['Адрес', 'Радиус (км.) ', 'Население'],
         ).to_excel(
             self.writer, sheet_name='Статистика')
 
