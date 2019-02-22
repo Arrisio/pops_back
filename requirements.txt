@@ -1,6 +1,6 @@
-openpyxl==2.5.8
+openpyxl==2.6.0
 pandas==0.23.4
-requests==2.20.0
-scipy==1.1.0
+requests==2.21.0
+scipy==1.2.1
 flask==1.0.2
-geopandas==0.3.0
+geopandas==0.4.0

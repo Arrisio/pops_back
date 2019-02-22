@@ -7,7 +7,7 @@ services:
         image: calcpops:latest
         ports:
             - 5006:5000
-        volumes:
-            - .:/app/
+#        volumes:
+#            - .:/app/
 
         command: python /app/app.py

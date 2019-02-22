@@ -6,10 +6,11 @@ from io import BytesIO
 
 import pandas as pd
 import requests
-import scipy.spatial as spatial
 
-from shapely.geometry import Point, Polygon
-import geopandas as gpd
+import scipy.spatial as spatial
+import pickle
+# from shapely.geometry import Point, Polygon
+# import geopandas as gpd
 
 DEFAULT_RADIUS = 1
 
@@ -24,10 +25,13 @@ def set_auto_width_excel_cols(worksheet, indent=4):
 def load_data():
     all_buildings_df = pd.read_pickle(os.path.join('data', 'data.pkl'))
     # all_buildings_geodata = None
-    all_buildings_geodata = gpd.read_file(
-        os.path.join('data', 'building_gpd.shp'))
-    all_buildings_point_tree = spatial.cKDTree(
-        all_buildings_df['pos'].tolist())
+    # all_buildings_geodata = gpd.read_file(
+    # os.path.join('data', 'building_gpd.shp'))
+
+    # all_buildings_point_tree = spatial.cKDTree(
+    # all_buildings_df['pos'].tolist())
+    with open(os.path.join('data', 'cKDTree.pkl'), 'rb') as fh:
+        all_buildings_point_tree = pickle.load(fh)
 
     return all_buildings_df, all_buildings_point_tree, all_buildings_geodata
 

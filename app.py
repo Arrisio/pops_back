@@ -7,7 +7,7 @@ from io import BytesIO
 app = Flask(__name__)
 
 
-@app.route('/rst/calcpops', methods=['POST', 'GET'])
+@app.route('/calcpops', methods=['POST', 'GET'])
 def calcpops_radius():
     print('Start')
     inp_address = request.args.get('address')
