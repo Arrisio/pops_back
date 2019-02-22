@@ -24,9 +24,9 @@ def set_auto_width_excel_cols(worksheet, indent=4):
 
 def load_data():
     all_buildings_df = pd.read_pickle(os.path.join('data', 'data.pkl'))
-    # all_buildings_geodata = None
-    # all_buildings_geodata = gpd.read_file(
-    # os.path.join('data', 'building_gpd.shp'))
+    all_buildings_geodata = None
+    all_buildings_geodata = gpd.read_file(
+        os.path.join('data', 'building_gpd.shp'))
 
     # all_buildings_point_tree = spatial.cKDTree(
     # all_buildings_df['pos'].tolist())
