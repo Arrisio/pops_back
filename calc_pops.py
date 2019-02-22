@@ -9,8 +9,8 @@ import requests
 
 import scipy.spatial as spatial
 import pickle
-# from shapely.geometry import Point, Polygon
-# import geopandas as gpd
+from shapely.geometry import Point, Polygon
+import geopandas as gpd
 
 DEFAULT_RADIUS = 1
 
